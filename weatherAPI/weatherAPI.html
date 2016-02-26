@@ -3,10 +3,12 @@
 
 <head>
 	<title>Weather API</title>
+	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script type="text/javascript" src="myscripts.js"></script>
 </head>
 
-<body>
+<body onload="myfun()">
 	
 <div>
 	<h3>Next days</h3>
@@ -92,98 +94,3 @@
 </body>
 
 </html>
-
-<script>
-
-var json_obj = JSON.parse(getJson());
-var month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-
-generalValue(0,"date1","weather1-1","weather1-2","desciption_1","detailInfo_1");
-generalValue(1,"date2","weather2-1","weather2-2","desciption_2","detailInfo_2");
-generalValue(2,"date3","weather3-1","weather3-2","desciption_3","detailInfo_3");
-generalValue(3,"date4","weather4-1","weather4-2","desciption_4","detailInfo_4");
-generalValue(4,"date5","weather5-1","weather5-2","desciption_5","detailInfo_5");
-generalValue(5,"date6","weather6-1","weather6-2","desciption_6","detailInfo_6");
-generalValue(6,"date7","weather7-1","weather7-2","desciption_7","detailInfo_7");
-
-function getJson(){
-	var httpXmlRequest = new XMLHttpRequest();
-	var url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Taipei&mode=json&units=metric&cnt= 7&appid=44db6a862fba0b067b1930da0d769e98";
-	httpXmlRequest.open("GET",url,false);
-	httpXmlRequest.send(null);
-	return httpXmlRequest.responseText;
-}
-
-function generalValue(listIds,dateId,weatherId1,weatherId2,desciption,detailInfo){
-	var getDate_1 = new Date((json_obj.list[listIds].dt)*1000).getDate();
-	var getMonth_1 = new Date((json_obj.list[listIds].dt)*1000).getMonth();
-	document.getElementById(dateId).innerHTML = getDate_1 + " " + month[getMonth_1] + "<img src='img/" + json_obj.list[listIds].weather[0].icon + ".png'>";
-	document.getElementById(weatherId1).innerHTML = json_obj.list[listIds].temp.min;
-	document.getElementById(weatherId2).innerHTML = json_obj.list[listIds].temp.max;
-	document.getElementById(desciption).innerHTML = json_obj.list[listIds].weather[0].description;
-	document.getElementById(detailInfo).innerHTML = json_obj.list[listIds].speed + "m/s" + "<br>" + "clouds: " + json_obj.list[listIds].clouds + "%, " + json_obj.list[listIds].pressure + " hpa";
-}
-
-// // day1
-// var getDate_1 = new Date((json_obj.list[0].dt)*1000).getDate();
-// var getMonth_1 = new Date((json_obj.list[0].dt)*1000).getMonth();
-// document.getElementById("date1").innerHTML = getDate_1 + " " + month[getMonth_1] + "<img src='img/" + json_obj.list[0].weather[0].icon + ".png'>";
-// document.getElementById("weather1-1").innerHTML = json_obj.list[0].temp.min;
-// document.getElementById("weather1-2").innerHTML = json_obj.list[0].temp.max;
-// document.getElementById("desciption_1").innerHTML = json_obj.list[0].weather[0].description;
-// document.getElementById("detailInfo_1").innerHTML = json_obj.list[0].speed + "m/s" + "<br>" + "clouds: " + json_obj.list[0].clouds + "%, " + json_obj.list[0].pressure + " hpa";
-
-// // day2
-// var getDate_2 = new Date((json_obj.list[1].dt)*1000).getDate();
-// var getMonth_2 = new Date((json_obj.list[1].dt)*1000).getMonth();
-// document.getElementById("date2").innerHTML = getDate_2 + " " + month[getMonth_2] + "<img src='img/" + json_obj.list[1].weather[0].icon + ".png'>";
-// document.getElementById("weather2-1").innerHTML = json_obj.list[1].temp.min;
-// document.getElementById("weather2-2").innerHTML = json_obj.list[1].temp.max;
-// document.getElementById("desciption_2").innerHTML = json_obj.list[1].weather[0].description;
-// document.getElementById("detailInfo_2").innerHTML = json_obj.list[1].speed + "m/s" + "<br>" + "clouds: " + json_obj.list[1].clouds + "%, " + json_obj.list[1].pressure + " hpa";
-
-// // day3
-// var getDate_3 = new Date((json_obj.list[2].dt)*1000).getDate();
-// var getMonth_3 = new Date((json_obj.list[2].dt)*1000).getMonth();
-// document.getElementById("date3").innerHTML = getDate_3 + " " + month[getMonth_3] + "<img src='img/" + json_obj.list[2].weather[0].icon + ".png'>";
-// document.getElementById("weather3-1").innerHTML = json_obj.list[2].temp.min;
-// document.getElementById("weather3-2").innerHTML = json_obj.list[2].temp.max;
-// document.getElementById("desciption_3").innerHTML = json_obj.list[2].weather[0].description;
-// document.getElementById("detailInfo_3").innerHTML = json_obj.list[2].speed + "m/s" + "<br>" + "clouds: " + json_obj.list[2].clouds + "%, " + json_obj.list[2].pressure + " hpa";
-
-// // day4
-// var getDate_4 = new Date((json_obj.list[3].dt)*1000).getDate();
-// var getMonth_4 = new Date((json_obj.list[3].dt)*1000).getMonth();
-// document.getElementById("date4").innerHTML = getDate_4 + " " + month[getMonth_4] + "<img src='img/" + json_obj.list[3].weather[0].icon + ".png'>";
-// document.getElementById("weather4-1").innerHTML = json_obj.list[3].temp.min;
-// document.getElementById("weather4-2").innerHTML = json_obj.list[3].temp.max;
-// document.getElementById("desciption_4").innerHTML = json_obj.list[3].weather[0].description;
-// document.getElementById("detailInfo_4").innerHTML = json_obj.list[3].speed + "m/s" + "<br>" + "clouds: " + json_obj.list[3].clouds + "%, " + json_obj.list[3].pressure + " hpa";
-
-// // day5
-// var getDate_5 = new Date((json_obj.list[4].dt)*1000).getDate();
-// var getMonth_5 = new Date((json_obj.list[4].dt)*1000).getMonth();
-// document.getElementById("date5").innerHTML = getDate_5 + " " + month[getMonth_5] + "<img src='img/" + json_obj.list[4].weather[0].icon + ".png'>";
-// document.getElementById("weather5-1").innerHTML = json_obj.list[4].temp.min;
-// document.getElementById("weather5-2").innerHTML = json_obj.list[4].temp.max;
-// document.getElementById("desciption_5").innerHTML = json_obj.list[4].weather[0].description;
-// document.getElementById("detailInfo_5").innerHTML = json_obj.list[4].speed + "m/s" + "<br>" + "clouds: " + json_obj.list[4].clouds + "%, " + json_obj.list[4].pressure + " hpa";
-
-// // day6
-// var getDate_6 = new Date((json_obj.list[5].dt)*1000).getDate();
-// var getMonth_6 = new Date((json_obj.list[5].dt)*1000).getMonth();
-// document.getElementById("date6").innerHTML = getDate_6 + " " + month[getMonth_6] + "<img src='img/" + json_obj.list[5].weather[0].icon + ".png'>";
-// document.getElementById("weather6-1").innerHTML = json_obj.list[5].temp.min;
-// document.getElementById("weather6-2").innerHTML = json_obj.list[5].temp.max;
-// document.getElementById("desciption_6").innerHTML = json_obj.list[5].weather[0].description;
-// document.getElementById("detailInfo_6").innerHTML = json_obj.list[5].speed + "m/s" + "<br>" + "clouds: " + json_obj.list[5].clouds + "%, " + json_obj.list[5].pressure + " hpa";
-
-// // day7
-// var getDate_7 = new Date((json_obj.list[6].dt)*1000).getDate();
-// var getMonth_7 = new Date((json_obj.list[6].dt)*1000).getMonth();
-// document.getElementById("date7").innerHTML = getDate_7 + " " + month[getMonth_7] + "<img src='img/" + json_obj.list[6].weather[0].icon + ".png'>";
-// document.getElementById("weather7-1").innerHTML = json_obj.list[6].temp.min;
-// document.getElementById("weather7-2").innerHTML = json_obj.list[6].temp.max;
-// document.getElementById("desciption_7").innerHTML = json_obj.list[6].weather[0].description;
-// document.getElementById("detailInfo_7").innerHTML = json_obj.list[6].speed + "m/s" + "<br>" + "clouds: " + json_obj.list[6].clouds + "%, " + json_obj.list[6].pressure + " hpa";
-</script>
