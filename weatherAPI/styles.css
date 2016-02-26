@@ -1,0 +1,33 @@
+body {
+	color: #505050;
+}
+
+
+h3 {
+	font-size:24px;
+	font-family: Oswald,sans-serif;
+}
+
+
+td {
+    padding: 8px;
+    line-height: 1.42857143;
+    /*vertical-align: top;*/
+    border-top: 1px solid #ddd;
+}
+
+img {
+	vertical-align: middle;
+}
+
+.label {
+	color: #fff;
+}
+
+.label-warning {
+	background-color: #f0ad4e;
+}
+
+.label-default {
+	background-color: #999;
+}
