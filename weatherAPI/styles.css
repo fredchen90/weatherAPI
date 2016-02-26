@@ -20,6 +20,10 @@ img {
 	vertical-align: middle;
 }
 
+p {
+    margin: 0 0 10px;	
+}
+
 .label {
 	color: #fff;
 }
