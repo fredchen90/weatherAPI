@@ -21,36 +21,36 @@ function generalValue(listIds,dateId,weatherId1,weatherId2,desciption,detailInfo
 
 function genHtml(dateId,weatherId1,weatherId2,desciption,detailInfo){
 	var hr = document.createElement("hr");
-    var div1 = document.createElement("div");
-    var div2 = document.createElement("div");
-    var div3 = document.createElement("div");
-    var span1 = document.createElement("span");
-    var span2 = document.createElement("span");
-    var i = document.createElement("i");
-    var p = document.createElement("p");
+	var div1 = document.createElement("div");
+	var div2 = document.createElement("div");
+	var div3 = document.createElement("div");
+	var span1 = document.createElement("span");
+	var span2 = document.createElement("span");
+	var i = document.createElement("i");
+	var p = document.createElement("p");
 
 // id
-    div2.id = dateId;
-    span1.id = weatherId1;
+	div2.id = dateId;
+	span1.id = weatherId1;
 	span2.id = weatherId2;
 	i.id = desciption;
 	p.id = detailInfo;
 // class
-    div2.className  = "date";
-    div3.className = "desciption";
+	div2.className  = "date";
+	div3.className = "desciption";
 	span1.className = "label label-warning";
 	span2.className = "label label-default left";
 	i.className = "left1";
 // append
-    div3.appendChild(span1);
-    div3.appendChild(span2);
-    div3.appendChild(i);
-    div3.appendChild(p);
-    div1.appendChild(div2);
-    div1.appendChild(div3);
+	div3.appendChild(span1);
+	div3.appendChild(span2);
+	div3.appendChild(i);
+	div3.appendChild(p);
+	div1.appendChild(div2);
+	div1.appendChild(div3);
 // append to top div
-    document.getElementById("myDIV").appendChild(hr);
-    document.getElementById("myDIV").appendChild(div1);
+	document.getElementById("myDIV").appendChild(hr);
+	document.getElementById("myDIV").appendChild(div1);
 }
 
 
