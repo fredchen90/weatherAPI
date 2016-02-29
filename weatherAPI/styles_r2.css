@@ -1,0 +1,57 @@
+body {
+	color: #505050;
+}
+
+
+h3 {
+	font-size:24px;
+	font-family: Oswald,sans-serif;
+}
+
+
+td {
+    padding: 8px;
+    line-height: 1.42857143;
+    /*vertical-align: top;*/
+    border-top: 1px solid #ddd;
+}
+
+img {
+	vertical-align: middle;
+}
+
+p {
+    margin: 0 0 10px;	
+}
+
+div div{
+	position:relative;height:100px;padding: 5px;
+}
+
+.date {
+	position:absolute;padding: 8px;line-height: 1.42857143;
+}
+
+.desciption {
+	position:absolute;left:100px;
+}
+
+.left {
+	position:absolute;left:43px;
+}
+
+.left1 {
+	position:absolute;left:100px;
+}
+
+.label {
+	color: #fff;
+}
+
+.label-warning {
+	background-color: #f0ad4e;
+}
+
+.label-default {
+	background-color: #999;
+}
