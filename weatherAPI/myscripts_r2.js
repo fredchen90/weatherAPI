@@ -31,8 +31,7 @@ function genHtml(dateId,weatherId1,weatherId2,desciption,detailInfo){
 	div2.className  = "date";
 	div3.className = "desciption";
 	span1.className = "label label-warning position";
-	span2.className = "label label-default position-left";
-	i.className = "left1";
+	span2.className = "label label-default position";
 // append
 	div3.appendChild(span1);
 	div3.appendChild(span2);
@@ -52,8 +51,6 @@ function mainFunc(){
 	var weather2 = ["weather1-2", "weather2-2", "weather3-2", "weather4-2", "weather5-2", "weather6-2", "weather7-2"];
 	var desciption = ["desciption_1", "desciption_2", "desciption_3", "desciption_4", "desciption_5", "desciption_6", "desciption_7"];
 	var detailInfo = ["detailInfo_1", "detailInfo_2", "detailInfo_3", "detailInfo_4", "detailInfo_5", "detailInfo_6", "detailInfo_7"];
-	var getDate_1;
-	var getMonth_1;
 
 	// AJAX
 	var httpXmlRequest = new XMLHttpRequest();
