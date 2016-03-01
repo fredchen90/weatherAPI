@@ -16,32 +16,46 @@ td {
     border-top: 1px solid #ddd;
 }
 
+hr {
+	color:#DDDDDD;
+	border-style:solid;
+}
+
 img {
 	vertical-align: middle;
 }
 
+i {
+	position:relative;left:10px;	
+}
+
 p {
-    margin: 0 0 10px;	
+    margin: 0 0 10px;
 }
 
 div div{
-	position:relative;height:100px;padding: 5px;
+	position:relative;height:100px;
+	padding: 5px;
+	line-height: 1.42857143;
 }
 
 .date {
-	position:absolute;padding: 8px;line-height: 1.42857143;
+	position:absolute;padding:5px;
+	width: 110px;
+	height: 40px;
+	top: 25%;
 }
 
 .desciption {
-	position:absolute;left:100px;
+	position:absolute;left:125px;
 }
 
-.left {
-	position:absolute;left:43px;
+.position {
+	position:relative;
 }
 
-.left1 {
-	position:absolute;left:100px;
+.position-left {
+	position:relative;left:3px;
 }
 
 .label {

@@ -38,8 +38,8 @@ function genHtml(dateId,weatherId1,weatherId2,desciption,detailInfo){
 // class
 	div2.className  = "date";
 	div3.className = "desciption";
-	span1.className = "label label-warning";
-	span2.className = "label label-default left";
+	span1.className = "label label-warning position";
+	span2.className = "label label-default position-left";
 	i.className = "left1";
 // append
 	div3.appendChild(span1);
