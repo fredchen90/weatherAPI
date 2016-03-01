@@ -1,13 +1,5 @@
-function getJson(){
-	var httpXmlRequest = new XMLHttpRequest();
-	var url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Taipei&mode=json&units=metric&cnt= 7&appid=44db6a862fba0b067b1930da0d769e98";
-	httpXmlRequest.open("GET",url,false);
-	httpXmlRequest.send(null);
-	return httpXmlRequest.responseText;
-}
-
-function generalValue(listIds,dateId,weatherId1,weatherId2,desciption,detailInfo){
-	var json_obj = JSON.parse(getJson());
+function genlValue(json,listIds,dateId,weatherId1,weatherId2,desciption,detailInfo){
+	var json_obj = json;
 	var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 	var getDate_1 = new Date((json_obj.list[listIds].dt)*1000).getDate();
 	var getMonth_1 = new Date((json_obj.list[listIds].dt)*1000).getMonth();
@@ -55,21 +47,34 @@ function genHtml(dateId,weatherId1,weatherId2,desciption,detailInfo){
 
 
 function mainFunc(){
-	// gen HTML
-	genHtml("date1","weather1-1","weather1-2","desciption_1","detailInfo_1");
-	genHtml("date2","weather2-1","weather2-2","desciption_2","detailInfo_2");
-	genHtml("date3","weather3-1","weather3-2","desciption_3","detailInfo_3");
-	genHtml("date4","weather4-1","weather4-2","desciption_4","detailInfo_4");
-	genHtml("date5","weather5-1","weather5-2","desciption_5","detailInfo_5");
-	genHtml("date6","weather6-1","weather6-2","desciption_6","detailInfo_6");
-	genHtml("date7","weather7-1","weather7-2","desciption_7","detailInfo_7");
+	var date = ["date1", "date2", "date3", "date4", "date5", "date6", "date7"];
+	var weather1 = ["weather1-1", "weather2-1", "weather3-1", "weather4-1", "weather5-1", "weather6-1", "weather7-1"];
+	var weather2 = ["weather1-2", "weather2-2", "weather3-2", "weather4-2", "weather5-2", "weather6-2", "weather7-2"];
+	var desciption = ["desciption_1", "desciption_2", "desciption_3", "desciption_4", "desciption_5", "desciption_6", "desciption_7"];
+	var detailInfo = ["detailInfo_1", "detailInfo_2", "detailInfo_3", "detailInfo_4", "detailInfo_5", "detailInfo_6", "detailInfo_7"];
+	var getDate_1;
+	var getMonth_1;
 
-	// fill value
-	generalValue(0,"date1","weather1-1","weather1-2","desciption_1","detailInfo_1");
-	generalValue(1,"date2","weather2-1","weather2-2","desciption_2","detailInfo_2");
-	generalValue(2,"date3","weather3-1","weather3-2","desciption_3","detailInfo_3");
-	generalValue(3,"date4","weather4-1","weather4-2","desciption_4","detailInfo_4");
-	generalValue(4,"date5","weather5-1","weather5-2","desciption_5","detailInfo_5");
-	generalValue(5,"date6","weather6-1","weather6-2","desciption_6","detailInfo_6");
-	generalValue(6,"date7","weather7-1","weather7-2","desciption_7","detailInfo_7");
+	// AJAX
+	var httpXmlRequest = new XMLHttpRequest();
+	var url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Taipei&mode=json&units=metric&cnt= 7&appid=44db6a862fba0b067b1930da0d769e98";
+	var json_obj;
+
+	// gen HTML
+	for (var i=0; i < date.length; i++){
+		genHtml(date[i],weather1[i],weather2[i],desciption[i],detailInfo[i]);
+		
+	}
+
+	httpXmlRequest.onreadystatechange = function() {
+		if(httpXmlRequest.readyState == 4 && httpXmlRequest.status == 200){
+			json_obj = JSON.parse(httpXmlRequest.responseText);
+			// gen value
+			for (var i=0; i < date.length; i++){
+				genlValue(json_obj,i,date[i],weather1[i],weather2[i],desciption[i],detailInfo[i]);
+			}
+		}
+	}
+	httpXmlRequest.open("GET",url,true);
+	httpXmlRequest.send(null);
 }
