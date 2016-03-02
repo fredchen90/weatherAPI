@@ -1,28 +1,9 @@
-function genlValue(json,listIds,dateId,weatherId1,weatherId2,desciption,detailInfo){
+function genHtml(json,listIds,dateId,weatherId1,weatherId2,desciption,detailInfo){
 	var json_obj = json;
 	var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 	var getDate_1 = new Date((json_obj.list[listIds].dt)*1000).getDate();
 	var getMonth_1 = new Date((json_obj.list[listIds].dt)*1000).getMonth();
 
-	// add class
-	document.getElementById(dateId).classList.add("i" + json_obj.list[listIds].weather[0].icon);
-	document.getElementById(weatherId1).classList.add("label");
-	document.getElementById(weatherId1).classList.add("label-warning");
-	document.getElementById(weatherId1).classList.add("icon-box");
-	document.getElementById(weatherId2).classList.add("label");
-	document.getElementById(weatherId2).classList.add("label-default");
-	document.getElementById(weatherId2).classList.add("icon-box");
-
-	// fill value
-	document.getElementById(dateId).innerHTML = getDate_1 + " " + month[getMonth_1];
-	document.getElementById(weatherId1).innerHTML = json_obj.list[listIds].temp.min;
-	document.getElementById(weatherId2).innerHTML = json_obj.list[listIds].temp.max;
-	document.getElementById(desciption).innerHTML = json_obj.list[listIds].weather[0].description;
-	document.getElementById(detailInfo).innerHTML = json_obj.list[listIds].speed + "m/s" + "<br>" + "clouds: " + json_obj.list[listIds].clouds + "%, " + json_obj.list[listIds].pressure + " hpa";
-}
-
-
-function genHtml(dateId,weatherId1,weatherId2,desciption,detailInfo){
 	var hr = document.createElement("hr");
 	var div1 = document.createElement("div");
 	var div2 = document.createElement("div");
@@ -53,8 +34,31 @@ function genHtml(dateId,weatherId1,weatherId2,desciption,detailInfo){
 // append to top div
 	document.getElementById("myDIV").appendChild(hr);
 	document.getElementById("myDIV").appendChild(div1);
+
+	// add class
+	document.getElementById(dateId).classList.add("i" + json_obj.list[listIds].weather[0].icon);
+	document.getElementById(weatherId1).classList.add("label");
+	document.getElementById(weatherId1).classList.add("label-warning");
+	document.getElementById(weatherId1).classList.add("icon-box");
+	document.getElementById(weatherId2).classList.add("label");
+	document.getElementById(weatherId2).classList.add("label-default");
+	document.getElementById(weatherId2).classList.add("icon-box");
+
+	// fill value
+	document.getElementById(dateId).innerHTML = getDate_1 + " " + month[getMonth_1];
+	document.getElementById(weatherId1).innerHTML = json_obj.list[listIds].temp.min;
+	document.getElementById(weatherId2).innerHTML = json_obj.list[listIds].temp.max;
+	document.getElementById(desciption).innerHTML = json_obj.list[listIds].weather[0].description;
+	document.getElementById(detailInfo).innerHTML = json_obj.list[listIds].speed + "m/s" + "<br>" + "clouds: " + json_obj.list[listIds].clouds + "%, " + json_obj.list[listIds].pressure + " hpa";
 }
 
+
+function getJson(url) {
+	var httpXmlRequest = new XMLHttpRequest();
+	httpXmlRequest.open("GET",url,true);
+	httpXmlRequest.send(null);
+	return httpXmlRequest
+}
 
 function mainFunc(){
 	var date = ["date1", "date2", "date3", "date4", "date5", "date6", "date7"];
@@ -64,25 +68,17 @@ function mainFunc(){
 	var detailInfo = ["detailInfo_1", "detailInfo_2", "detailInfo_3", "detailInfo_4", "detailInfo_5", "detailInfo_6", "detailInfo_7"];
 
 	// AJAX
-	var httpXmlRequest = new XMLHttpRequest();
 	var url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Taipei&mode=json&units=metric&cnt= 7&appid=44db6a862fba0b067b1930da0d769e98";
 	var json_obj;
+	var hmlRequest = getJson(url);
 
-	// gen HTML
-	for (var i=0; i < date.length; i++){
-		genHtml(date[i],weather1[i],weather2[i],desciption[i],detailInfo[i]);
-		
-	}
-
-	httpXmlRequest.onreadystatechange = function() {
-		if(httpXmlRequest.readyState == 4 && httpXmlRequest.status == 200){
-			json_obj = JSON.parse(httpXmlRequest.responseText);
-			// gen value
+	hmlRequest.onreadystatechange = function() {
+		if(hmlRequest.readyState == 4 && hmlRequest.status == 200){
+			json_obj = JSON.parse(hmlRequest.responseText);
+			// gen html
 			for (var i=0; i < date.length; i++){
-				genlValue(json_obj,i,date[i],weather1[i],weather2[i],desciption[i],detailInfo[i]);
+				genHtml(json_obj,i,date[i],weather1[i],weather2[i],desciption[i],detailInfo[i]);
 			}
 		}
 	}
-	httpXmlRequest.open("GET",url,true);
-	httpXmlRequest.send(null);
 }
