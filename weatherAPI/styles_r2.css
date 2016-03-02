@@ -49,9 +49,9 @@ div div{
 	margin-top: -6px;
 }
 
-.position {
-	padding: 5px;
-	margin: 2px;
+.icon-box {
+	padding: 3px;
+	margin: 1px;
 }
 
 .label {
@@ -64,4 +64,40 @@ div div{
 
 .label-default {
 	background-color: #999;
+}
+
+.background-img {
+	background-image: url(img/result.png);
+/*	background-position: 60px 0px;*/
+	background-repeat: no-repeat;
+}
+
+.i01d {
+	background-image: url(img/result.png);
+	background-repeat: no-repeat;
+	background-position: 60px 0px;
+}
+
+.i01n {
+	background-image: url(img/result.png);
+	background-repeat: no-repeat;
+	background-position: 60px -60px;
+}
+
+.i02d {
+	background-image: url(img/result.png);
+	background-repeat: no-repeat;
+	background-position: 60px -120px;
+}
+
+.i04d {
+	background-image: url(img/result.png);
+	background-repeat: no-repeat;
+	background-position: 60px -180px;
+}
+
+.i10d {
+	background-image: url(img/result.png);
+	background-repeat: no-repeat;
+	background-position: 60px -240px;
 }

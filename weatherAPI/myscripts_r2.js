@@ -3,7 +3,18 @@ function genlValue(json,listIds,dateId,weatherId1,weatherId2,desciption,detailIn
 	var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 	var getDate_1 = new Date((json_obj.list[listIds].dt)*1000).getDate();
 	var getMonth_1 = new Date((json_obj.list[listIds].dt)*1000).getMonth();
-	document.getElementById(dateId).innerHTML = getDate_1 + " " + month[getMonth_1] + "<img src='img/" + json_obj.list[listIds].weather[0].icon + ".png'>";
+
+	// add class
+	document.getElementById(dateId).classList.add("i" + json_obj.list[listIds].weather[0].icon);
+	document.getElementById(weatherId1).classList.add("label");
+	document.getElementById(weatherId1).classList.add("label-warning");
+	document.getElementById(weatherId1).classList.add("icon-box");
+	document.getElementById(weatherId2).classList.add("label");
+	document.getElementById(weatherId2).classList.add("label-default");
+	document.getElementById(weatherId2).classList.add("icon-box");
+
+	// fill value
+	document.getElementById(dateId).innerHTML = getDate_1 + " " + month[getMonth_1];
 	document.getElementById(weatherId1).innerHTML = json_obj.list[listIds].temp.min;
 	document.getElementById(weatherId2).innerHTML = json_obj.list[listIds].temp.max;
 	document.getElementById(desciption).innerHTML = json_obj.list[listIds].weather[0].description;
@@ -30,8 +41,8 @@ function genHtml(dateId,weatherId1,weatherId2,desciption,detailInfo){
 // class
 	div2.className  = "date";
 	div3.className = "desciption";
-	span1.className = "label label-warning position";
-	span2.className = "label label-default position";
+	// span1.className = "label label-warning icon-box";
+	// span2.className = "label label-default icon-box";
 // append
 	div3.appendChild(span1);
 	div3.appendChild(span2);
