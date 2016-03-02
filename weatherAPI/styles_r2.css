@@ -35,15 +35,15 @@ div div{
 
 .date {
 	display: inline-block;
-	width: 90px;
+	width: 120px;
 	height: 60px;
 	padding: 5px;
 }
 
 .desciption {
 	display: inline-block;
-	width: 230px;
-	height: 80px;
+	width: 270px;
+	height: 110px;
 	padding: 5px;
 	vertical-align: middle;
 	margin-top: -6px;
