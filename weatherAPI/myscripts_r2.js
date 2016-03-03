@@ -53,11 +53,16 @@ function genHtml(json,listIds,dateId,weatherId1,weatherId2,desciption,detailInfo
 }
 
 
-function getJson(url,callback) {
+function getJson(url,method,callback) {
 	var httpXmlRequest = new XMLHttpRequest();
-	httpXmlRequest.open("GET",url,true);
+	httpXmlRequest.open(method,url,true);
 	httpXmlRequest.send(null);
-	callback(httpXmlRequest);
+		httpXmlRequest.onreadystatechange = function() {
+			if(httpXmlRequest.readyState == 4 && httpXmlRequest.status == 200){
+				json_obj = JSON.parse(httpXmlRequest.responseText);
+				callback(json_obj);
+			}
+		}
 }
 
 // global
@@ -69,16 +74,9 @@ var detailInfo = ["detailInfo_1", "detailInfo_2", "detailInfo_3", "detailInfo_4"
 
 function mainFunc(){
 	var url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Taipei&mode=json&units=metric&cnt= 7&appid=44db6a862fba0b067b1930da0d769e98";
-	var json_obj;
-	getJson(url,function(hmlRequest){
-		hmlRequest.onreadystatechange = function() {
-			if(hmlRequest.readyState == 4 && hmlRequest.status == 200){
-				json_obj = JSON.parse(hmlRequest.responseText);
-				// gen html
-				for (var i=0; i < date.length; i++){
-					genHtml(json_obj,i,date[i],weather1[i],weather2[i],desciption[i],detailInfo[i]);
-				}
-			}
+	getJson(url,"GET",function(json_obj){
+		for (var i=0; i < date.length; i++){
+			genHtml(json_obj,i,date[i],weather1[i],weather2[i],desciption[i],detailInfo[i]);
 		}
 	});
 }
