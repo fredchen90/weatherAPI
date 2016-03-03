@@ -33,11 +33,26 @@ div div{
 	display: inline-block;
 }
 
-.date {
+.date-weather-block {
 	display: inline-block;
 	width: 120px;
-	height: 60px;
+	height: 110px;
 	padding: 5px;
+	vertical-align: middle;
+}
+
+.date {
+	float:left;
+	padding:1px;
+	margin-top:33px
+}
+
+.icon {
+	float: left;
+	width: 50px;
+	height: 50px;
+	padding: 2px;
+	margin-top: 26px;
 }
 
 .desciption {
@@ -75,29 +90,29 @@ div div{
 .i01d {
 	background-image: url(img/result.png);
 	background-repeat: no-repeat;
-	background-position: 60px 0px;
+	background-position: 0px 0px;
 }
 
 .i01n {
 	background-image: url(img/result.png);
 	background-repeat: no-repeat;
-	background-position: 60px -60px;
+	background-position: 0px -60px;
 }
 
 .i02d {
 	background-image: url(img/result.png);
 	background-repeat: no-repeat;
-	background-position: 60px -120px;
+	background-position: 0px -120px;
 }
 
 .i04d {
 	background-image: url(img/result.png);
 	background-repeat: no-repeat;
-	background-position: 60px -180px;
+	background-position: 0px -180px;
 }
 
 .i10d {
 	background-image: url(img/result.png);
 	background-repeat: no-repeat;
-	background-position: 60px -240px;
+	background-position: 0px -240px;
 }
