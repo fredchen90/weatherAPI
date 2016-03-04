@@ -1,44 +1,22 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<title>Weather API</title>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="styles_r2.css">
 	<script type="text/javascript" src="myscripts_r2.js"></script>
 </head>
-
 <body onload="mainFunc()">
 
-<!-- <div style="width:300px;height:600px">
-	<h3>Next days</h3>
-	<hr>
-	<div style="position:relative;height:100px;padding: 5px">
-	 	<div id="myDIV" style="position:absolute;padding: 8px;line-height: 1.42857143;">25 Feb</div>
-	 	<div style="position:absolute;left:100px">
-							<span id="weather1-1" class="label label-warning">14.84</span>
-							<span id="weather1-2" class="label label-default">18</span>
-							&nbsp;&nbsp;
-							<i id="desciption_1"> light rain</i>
-							<p id="detailInfo_1">4.12m/s<br>clouds: 88%, 1029.4 hpa</p> 		
-	 	</div>
- 	</div>
- 	<hr>
-	<div style="position:relative;height:100px">
-	 	<div id="myDIV" style="position:absolute;padding: 8px;line-height: 1.42857143;">25 Feb</div>
-	 	<div style="position:absolute;left:100px">
-							<span id="weather1-1" class="label label-warning">14.84</span>
-							<span id="weather1-2" class="label label-default">18</span>
-							&nbsp;&nbsp;
-							<i id="desciption_1"> light rain</i>
-							<p id="detailInfo_1">4.12m/s<br>clouds: 88%, 1029.4 hpa</p> 		
-	 	</div>
- 	</div> 	
-</div> -->
-<h3>Next days</h3>
-<div id="myDIV" style="width:450px;height:1100px"></div>
+<div style="width:450px;height:50px;">
+	<ul style="width:80%;height:100%">
+		<li style="float:left;list-style:none;background:#666666"><a href="weatherAPI_r2.html" style="text-decoration:none" onclick="alert('hi friend');">Current City</a></li>
+		<li style="float:left;list-style:none"><a href="#date7" style="text-decoration:none">Next Days</a></li>
+	</ul>
+</div>
 
+<div id="nextDay" style="width:450px;height:1100px;display:block;"></div>
+<div id="myDIV" style="width:450px;height:1100px;display:none"><p>測試</p></div>
 
 </body>
-
 </html>
