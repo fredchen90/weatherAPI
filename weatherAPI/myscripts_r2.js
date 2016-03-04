@@ -9,8 +9,10 @@ function genHtml(json,listIds,dateId,weatherId1,weatherId2,desciption,speed,clou
 				"</div><div class='desciption'><span id='"+weatherId1+"'class='label label-warning icon-box'>21.26</span><span id='"+weatherId2+"' class='label label-default icon-box'>"+
 				"</span><i id='"+desciption+"'>broken clouds</i><p><span id='"+speed+"' style='display:block;'></span><span id='"+clouds+"' style='display:inline-block;'></span>"+
 				"<span id='"+pressure+"' style='display:inline-block;'></span></p></div></div>";
-
-	document.getElementById("myDIV").innerHTML += tempHtml;
+	if (parseInt(listIds) == 0){
+		document.getElementById("nextDay").innerHTML = "<h3>Next days</h3>";
+	}
+	document.getElementById("nextDay").innerHTML += tempHtml;
 
 	// fill value
 	document.getElementById(dateId).innerHTML = getDate_1 + " " + month[getMonth_1];
