@@ -10,13 +10,78 @@
 
 <div style="width:450px;height:50px;">
 	<ul style="width:80%;height:100%">
-		<li style="float:left;list-style:none;background:#666666"><a href="weatherAPI_r2.html" style="text-decoration:none" onclick="alert('hi friend');">Current City</a></li>
-		<li style="float:left;list-style:none"><a href="#date7" style="text-decoration:none">Next Days</a></li>
+		<li style="float:left;list-style:none"><a href="#CurrentCity" id="tab_currentCity" class="tab-focus" onclick="currentCity();">Current City</a></li>
+		<li style="float:left;list-style:none"><a href="#NextDay" id="tab_nextDay" style="text-decoration:none" onclick="nextDay();">Next Days</a></li>
 	</ul>
 </div>
 
-<div id="nextDay" style="width:450px;height:1100px;display:block;"></div>
-<div id="myDIV" style="width:450px;height:1100px;display:none"><p>測試</p></div>
+<div>
+	<div id="dropdown_city">
+		<select onChange="">
+		<option value="#">請選擇</option>
+		<option value="taipei">Taipei<ption>
+		<option value="newyork">New York</option>
+		<option value="london">London</option>
+		</select>
+	</div>
+	<div id="currentCity" style="width:450px;height:1100px;display:block;">
+		<h3 id="city_name"></h3>
+		<div>
+			<h2>
+<!-- 				<img src="img/01d.png" style="float:left"></img> -->
+				<span id="city_weather-img" class="city-icon"></span>
+				<span id="city_temp" style="display:inline-block;margin-top:10px"></span>
+			</h2>
+			<span id="city_desciption" style="display:block;"></span>
+			<span id="get_time" style="display:block;">get at 2016.03.07 15:30 (Wrong data?)</span>
+			<table rules="all" cellpadding='5'>
+				<tbody>
+					<tr>
+						<td>Wind</td>
+						<td id="city_wind"></td>
+					</tr>
+					<tr>
+						<td>Cloudiness</td>
+						<td id="city_cloud"></td>
+					</tr>
+					<tr>
+						<td>Pressure</td>
+						<td id="city_pressure"></td>
+					</tr>
+					<tr>
+						<td>Humidity</td>
+						<td id="city_humidity"></td>
+					</tr>
+					<tr>
+						<td>Sunrise</td>
+						<td id="city_sunrise"></td>
+					</tr>
+					<tr>
+						<td>Sunset</td>
+						<td id="city_sunset"></td>
+					</tr>
+					<tr>
+						<td>Geo coords</td>
+						<td id="city_geocoords"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</div>
+
+<div>
+	<div id="dropdown_days" style="display:none;">
+		<select onChange="">
+		<option value="#">請選擇</option>
+		<option value="taipei">5 days<ption>
+		<option value="newyork">6 days</option>
+		<option value="london">7 days</option>
+		</select>
+	</div>
+	<div id="nextDay" style="width:450px;height:1100px;display:none"></div>
+</div>
 
 </body>
 </html>
