@@ -17,7 +17,7 @@
 
 <div id="container_currentCity" class="show">
 	<div id="dropdown_city">
-		<select onChange="">
+		<select onChange="onChangeForCity(this.options[this.selectedIndex].value)">
 		<option value="#">請選擇</option>
 		<option value="taipei">Taipei<ption>
 		<option value="newyork">New York</option>
