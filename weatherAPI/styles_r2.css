@@ -54,6 +54,14 @@ tr:nth-child(odd) td {
 	display: inline-block;
 }*/
 
+.hide {
+	display:none;
+}
+
+.show {
+	display:block;
+}
+
 .tab-focus {
 	color: #555;
  	background-color: #fff;
