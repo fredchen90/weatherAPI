@@ -72,11 +72,11 @@
 
 <div id="container_nextday" class="hide">
 	<div id="dropdown_days">
-		<select onChange="">
+		<select onChange="onChangeForDays(this.options[this.selectedIndex].value)">
 		<option value="#">請選擇</option>
-		<option value="taipei">5 days<ption>
-		<option value="newyork">6 days</option>
-		<option value="london">7 days</option>
+		<option value="5">5 days<ption>
+		<option value="6">6 days</option>
+		<option value="7">7 days</option>
 		</select>
 	</div>
 	<div id="nextDay" style="width:450px;height:1100px"></div>

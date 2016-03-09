@@ -1,17 +1,31 @@
 function onChangeForDays(days){
+	DomId_nextday = document.getElementById("nextDay");
+	month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 	switch (days){
 		case '5':
-			alert("5");
+			url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Taipei&mode=json&units=metric&cnt=5&appid=44db6a862fba0b067b1930da0d769e98";
+			n = 5;
 			break;
 		case '6':
-			alert("6");
+			url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Taipei&mode=json&units=metric&cnt=6&appid=44db6a862fba0b067b1930da0d769e98";
+			n = 6;
 			break;
 		case '7':
-			alert("7");
+			url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Taipei&mode=json&units=metric&cnt=7&appid=44db6a862fba0b067b1930da0d769e98";
+			n = 7;
 			break;
 		default:
+			url = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Taipei&mode=json&units=metric&cnt=5&appid=44db6a862fba0b067b1930da0d769e98";
+			n = 5;
 			break;
 	}
+	xHR(url,"GET","json",function(json_obj){
+		// Add next day title for next day block
+		DomId_nextday.innerHTML = "<h3>Next days</h3>";
+		for (var j=0; j < n; j++){
+			genNextDayHtml(json_obj,month,j,DomId_nextday);
+		}
+	});
 }
 
 function onChangeForCity(city){
@@ -160,7 +174,7 @@ function mainFunc(){
 		xHR(url_7days,"GET","json",function(json_obj){
 			// Add next day title for next day block
 			DomId_nextday.innerHTML = "<h3>Next days</h3>";
-			for (var i=1,j=0; j < 7; i++,j++){
+			for (var j=0; j < 7; j++){
 				// 7 days
 				genNextDayHtml(json_obj,month,j,DomId_nextday);
 			}
