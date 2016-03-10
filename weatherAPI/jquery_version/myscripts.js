@@ -1,24 +1,10 @@
 function onChangeForDays(days){
 	DomId_nextday = document.getElementById("nextDay");
 	month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-	switch (days){
-		case '5':
-		default:
-			url = "http://api.openweathermap.org/data/2.5/forecast/daily?q="+record_city+"&mode=json&units=metric&cnt=5&appid=44db6a862fba0b067b1930da0d769e98";
-			n = 5;
-			break;
-		case '6':
-			url = "http://api.openweathermap.org/data/2.5/forecast/daily?q="+record_city+"&mode=json&units=metric&cnt=6&appid=44db6a862fba0b067b1930da0d769e98";
-			n = 6;
-			break;
-		case '7':
-			url = "http://api.openweathermap.org/data/2.5/forecast/daily?q="+record_city+"&mode=json&units=metric&cnt=7&appid=44db6a862fba0b067b1930da0d769e98";
-			n = 7;
-			break;
-	}
+	url = "http://api.openweathermap.org/data/2.5/forecast/daily?q="+record_city+"&mode=json&units=metric&cnt="+days+"&appid=44db6a862fba0b067b1930da0d769e98";
 	xHR(url,"GET","json",function(json_obj){
 		DomId_nextday.innerHTML = "<h3>Next days</h3>";
-		for (var j=0; j < n; j++){
+		for (var j=0; j < days; j++){
 			genNextDayHtml(json_obj,month,j,DomId_nextday);
 		}
 	});
@@ -26,7 +12,6 @@ function onChangeForDays(days){
 
 function onChangeForCity(city){
 	city_name = "Taipei, TW";
-	DomId_nextday = document.getElementById("nextDay");
 	DomId_get_time = document.getElementById("get_time");
 	DomId_city_name = document.getElementById("city_name");
 	DomId_city_weather_img = document.getElementById("city_weather-img");
@@ -180,17 +165,4 @@ function mainFunc(){
 				DomId_city_pressure,DomId_city_humidity,DomId_city_sunrise,DomId_city_sunset,DomId_city_geocoords);
 		});	
 	 });
-
-	// xHR(url_current_city,"GET","xml",function(xml_obj){
-	// 	genCurrentCityHtml(xml_obj,0,city_id,DomId_get_time,DomId_city_name,DomId_city_weather_img,DomId_city_temp,DomId_city_desciption,DomId_city_cloud,DomId_city_wind,
-	// 		DomId_city_pressure,DomId_city_humidity,DomId_city_sunrise,DomId_city_sunset,DomId_city_geocoords);
-	// 	xHR(url_7days,"GET","json",function(json_obj){
-	// 		// Add next day title for next day block
-	// 		DomId_nextday.innerHTML = "<h3>Next days</h3>";
-	// 		for (var j=0; j < 7; j++){
-	// 			// 7 days
-	// 			genNextDayHtml(json_obj,month,j,DomId_nextday);
-	// 		}
-	// 	});
-	// });
 }
