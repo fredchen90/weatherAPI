@@ -67,9 +67,8 @@ function currentCity(){
 	var tab_currentCity = document.getElementById("tab_currentCity");
 	var tab_nextDay = document.getElementById("tab_nextDay");
 	tab_currentCity.className = "tab-focus";
-	tab_nextDay.className = "tab";
-	document.getElementById("container_currentCity").className = "show";
-	document.getElementById("container_nextday").className = "hide";
+	$("#container_currentCity").show();
+	$("#container_nextday").hide();
 }
 
 function nextDay(){
@@ -77,8 +76,8 @@ function nextDay(){
 	var tab_currentCity = document.getElementById("tab_currentCity");
 	tab_nextDay.className = "tab-focus";
 	tab_currentCity.className = "tab";
-	document.getElementById("container_nextday").className = "show";
-	document.getElementById("container_currentCity").className = "hide";
+	$("#container_nextday").show();
+	$("#container_currentCity").hide();
 }
 
 function genNextDayHtml(json,month,listIds,DomId_nextday){
@@ -143,7 +142,8 @@ function xHR(url,method,format,callback) {
 
 // global
 var record_city;
-
+var DomId_nextday,DomId_get_time,DomId_city_name,DomId_city_weather_img,DomId_city_temp,DomId_city_desciption,DomId_city_cloud,DomId_city_wind,DomId_city_pressure,
+	DomId_city_humidity,DomId_city_sunrise,DomId_city_sunset,DomId_city_geocoords;
 function mainFunc(){
 	var url_7days = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Taipei&mode=json&units=metric&cnt= 7&appid=44db6a862fba0b067b1930da0d769e98";
 	var url_current_city = "http://api.openweathermap.org/data/2.5/weather?q=Taipei,tw&mode=xml&units=metric&appid=44db6a862fba0b067b1930da0d769e98";
@@ -163,6 +163,9 @@ function mainFunc(){
 	var DomId_city_geocoords = document.getElementById("city_geocoords");
 	var city_id = 1668341;
 
+	$("#container_currentCity").show();
+	$("#container_nextday").hide();
+
 	record_city = "taipei";
 
 	$.getJSON(url_7days,function(result){
@@ -171,7 +174,11 @@ function mainFunc(){
 		for (var j=0; j < 7; j++){
 			// 7 days
 			genNextDayHtml(result,month,j,DomId_nextday);
-		}		
+		}
+		xHR(url_current_city,"GET","xml",function(xml_obj){
+			genCurrentCityHtml(xml_obj,0,city_id,DomId_get_time,DomId_city_name,DomId_city_weather_img,DomId_city_temp,DomId_city_desciption,DomId_city_cloud,DomId_city_wind,
+				DomId_city_pressure,DomId_city_humidity,DomId_city_sunrise,DomId_city_sunset,DomId_city_geocoords);
+		});	
 	 });
 
 	// xHR(url_current_city,"GET","xml",function(xml_obj){
