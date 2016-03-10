@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Weather API</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script type="text/javascript" src="myscripts.js"></script>
+</head>
+<body onload="mainFunc()">
+
+<div style="width:450px;height:50px;">
+	<ul style="width:80%;height:100%">
+		<li style="float:left;list-style:none"><a href="#CurrentCity" id="tab_currentCity" class="tab-focus" onclick="currentCity();">Current City</a></li>
+		<li style="float:left;list-style:none"><a href="#NextDay" id="tab_nextDay" style="text-decoration:none" onclick="nextDay();">Next Days</a></li>
+	</ul>
+</div>
+
+<div id="container_currentCity" class="show">
+	<div id="dropdown_city">
+		<select onChange="onChangeForCity(this.options[this.selectedIndex].value)">
+		<option value="#">請選擇</option>
+		<option value="taipei">Taipei<ption>
+		<option value="newyork">New York</option>
+		<option value="london">London</option>
+		</select>
+	</div>
+	<div style="width:450px;height:1100px;">
+		<h3 id="city_name"></h3>
+		<div>
+			<h2>
+				<span id="city_weather-img" class="city-icon"></span>
+				<span id="city_temp" style="display:inline-block;margin-top:10px"></span>
+			</h2>
+			<span id="city_desciption" style="display:block;"></span>
+			<span id="get_time" style="display:block;"></span>
+			<table rules="all" cellpadding='5'>
+				<tbody>
+					<tr>
+						<td>Wind</td>
+						<td id="city_wind"></td>
+					</tr>
+					<tr>
+						<td>Cloudiness</td>
+						<td id="city_cloud"></td>
+					</tr>
+					<tr>
+						<td>Pressure</td>
+						<td id="city_pressure"></td>
+					</tr>
+					<tr>
+						<td>Humidity</td>
+						<td id="city_humidity"></td>
+					</tr>
+					<tr>
+						<td>Sunrise</td>
+						<td id="city_sunrise"></td>
+					</tr>
+					<tr>
+						<td>Sunset</td>
+						<td id="city_sunset"></td>
+					</tr>
+					<tr>
+						<td>Geo coords</td>
+						<td id="city_geocoords"></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</div>
+
+<div id="container_nextday" class="hide">
+	<div id="dropdown_days">
+		<select onChange="onChangeForDays(this.options[this.selectedIndex].value)">
+		<option value="#">請選擇</option>
+		<option value="5">5 days<ption>
+		<option value="6">6 days</option>
+		<option value="7">7 days</option>
+		</select>
+	</div>
+	<div id="nextDay" style="width:450px;height:1100px"></div>
+</div>
+
+</body>
+</html>
