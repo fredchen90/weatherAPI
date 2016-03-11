@@ -17,17 +17,17 @@ function onChangeForCity(city){
 		default:
 			url = "http://api.openweathermap.org/data/2.5/weather?q=Taipei,tw&mode=xml&units=metric&appid=44db6a862fba0b067b1930da0d769e98";
 			id = 1668341;
-			record_city = "taipei";
+			record_city = city;
 			break;
 		case 'newyork':
 			url = "http://api.openweathermap.org/data/2.5/weather?q=Newyork,us&mode=xml&units=metric&appid=44db6a862fba0b067b1930da0d769e98";
 			id = 5128581;
-			record_city = "newyork";
+			record_city = city;
 			break;
 		case 'london':
 			url = "http://api.openweathermap.org/data/2.5/weather?q=london,uk&mode=xml&units=metric&appid=44db6a862fba0b067b1930da0d769e98";
 			id = 2643743;
-			record_city = "london";
+			record_city = city;
 			break;
 	}
 	$.get(url,function(result){
@@ -127,7 +127,6 @@ function mainFunc(){
 	record_city = "taipei";
 
 	$.getJSON(url_7days,function(result){
-		console.log(result);
 		DomId_nextday.innerHTML = "<h3>Next days</h3>";
 		for (var j=0; j < 7; j++){
 			// 7 days
