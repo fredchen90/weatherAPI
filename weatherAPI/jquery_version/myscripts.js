@@ -1,7 +1,7 @@
 function onChangeForDays(days){
 	DomId_nextday = document.getElementById("nextDay");
 	month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-	url = "http://api.openweathermap.org/data/2.5/forecast/daily?q="+record_city+"&mode=json&units=metric&cnt="+days+"&appid=44db6a862fba0b067b1930da0d769e98";
+	url = "http://api.openweathermap.org/data/2.5/forecast/daily?q="+record_city+"&mode=json&units=metric&cnt="+days+"&appid=5df396cf7b4d7b339bc250ebfd041f2e";
 	$.getJSON(url,function(result){
 		DomId_nextday.innerHTML = "<h3>Next days</h3>";
 		for (var j=0; j < days; j++){
@@ -15,17 +15,17 @@ function onChangeForCity(city){
 	switch (city){
 		case 'taipei':
 		default:
-			url = "http://api.openweathermap.org/data/2.5/weather?q=Taipei,tw&mode=xml&units=metric&appid=44db6a862fba0b067b1930da0d769e98";
+			url = "http://api.openweathermap.org/data/2.5/weather?q=Taipei,tw&mode=xml&units=metric&appid=5df396cf7b4d7b339bc250ebfd041f2e";
 			id = 1668341;
 			record_city = city;
 			break;
 		case 'newyork':
-			url = "http://api.openweathermap.org/data/2.5/weather?q=Newyork,us&mode=xml&units=metric&appid=44db6a862fba0b067b1930da0d769e98";
+			url = "http://api.openweathermap.org/data/2.5/weather?q=Newyork,us&mode=xml&units=metric&appid=5df396cf7b4d7b339bc250ebfd041f2e";
 			id = 5128581;
 			record_city = city;
 			break;
 		case 'london':
-			url = "http://api.openweathermap.org/data/2.5/weather?q=london,uk&mode=xml&units=metric&appid=44db6a862fba0b067b1930da0d769e98";
+			url = "http://api.openweathermap.org/data/2.5/weather?q=london,uk&mode=xml&units=metric&appid=5df396cf7b4d7b339bc250ebfd041f2e";
 			id = 2643743;
 			record_city = city;
 			break;
@@ -70,70 +70,54 @@ function genNextDayHtml(json,month,listIds,DomId_nextday){
 	DomId_nextday.innerHTML += tempHtml;
 }
 
-function genCurrentCityHtml(xml,listIds,city_id){
-	var xmlDomId_current = xml.getElementsByTagName("current")[0];
-	var get_last_update_time = new Date(xmlDomId_current.childNodes[9].getAttributeNode("value").nodeValue);
-	var get_sunrise_time = new Date(xmlDomId_current.childNodes[0].childNodes[2].getAttributeNode("rise").nodeValue);
-	var get_sunrset_time = new Date(xmlDomId_current.childNodes[0].childNodes[2].getAttributeNode("set").nodeValue);
-	var weather_icon = "i" + xmlDomId_current.childNodes[8].getAttributeNode("icon").nodeValue;
-	$("#get_time").html(get_last_update_time.toLocaleString());
-	$("#city_name").html(xmlDomId_current.childNodes[0].getAttributeNode("name").nodeValue + ", " + xml.getElementsByTagName("city")[0].childNodes[1].childNodes[0].nodeValue);
-	$("#city_weather-img").addClass(weather_icon);
-	$("#city_temp").html(xml.getElementById(city_id).nextSibling.getAttributeNode("value").nodeValue);
-	$("#city_desciption").html(xmlDomId_current.childNodes[8].getAttributeNode("value").nodeValue);
-	$("#city_cloud").html(xmlDomId_current.childNodes[5].getAttributeNode("name").nodeValue);
-	$("#city_wind").html(xmlDomId_current.childNodes[4].childNodes[0].getAttributeNode("name").nodeValue + " " + 
-								xmlDomId_current.childNodes[4].childNodes[0].getAttributeNode("value").nodeValue + " m/s" + "<br>" +
-								xmlDomId_current.childNodes[4].childNodes[2].getAttributeNode("name").nodeValue + "(" +
-								xmlDomId_current.childNodes[4].childNodes[2].getAttributeNode("value").nodeValue + ")");
-	$("#city_pressure").html(xmlDomId_current.childNodes[3].getAttributeNode("value").nodeValue + " hpa");
-	$("#city_humidity").html(xmlDomId_current.childNodes[2].getAttributeNode("value").nodeValue + "%");
-	$("#city_sunrise").html(get_sunrise_time.getHours().toLocaleString() + ":" + get_sunrise_time.getMinutes().toLocaleString());
-	$("#city_sunset").html(get_sunrset_time.getHours().toLocaleString() + ":" + get_sunrset_time.getMinutes().toLocaleString());
-	$("#city_geocoords").html(xmlDomId_current.childNodes[0].childNodes[0].getAttributeNode("lon").nodeValue + ", " +
-									 xmlDomId_current.childNodes[0].childNodes[0].getAttributeNode("lat").nodeValue);
-}
+function genCurrentCityHtml(xml){
+	$("#get_time").html(new Date(xml.getElementsByTagName("lastupdate")[0].getAttributeNode("value").nodeValue).toLocaleString());
+	$("#city_name").html(xml.getElementsByTagName("city")[0].getAttributeNode("name").nodeValue+", "+
+						 xml.getElementsByTagName("country")[0].childNodes[0].nodeValue);
+	$("#city_weather-img").addClass("i"+xml.getElementsByTagName("weather")[0].getAttributeNode("icon").nodeValue);
+	$("#city_temp").html(xml.getElementsByTagName("temperature")[0].getAttributeNode("value").nodeValue);
+	$("#city_desciption").html(xml.getElementsByTagName("weather")[0].getAttributeNode("value").nodeValue);
+	$("#city_cloud").html(xml.getElementsByTagName("clouds")[0].getAttributeNode("name").nodeValue);
+	$("#city_wind").html(xml.getElementsByTagName("speed")[0].getAttributeNode("name").nodeValue+" "+
+						 xml.getElementsByTagName("speed")[0].getAttributeNode("value").nodeValue+" m/s" + "<br>"+
+						 xml.getElementsByTagName("direction")[0].getAttributeNode("name").nodeValue+"("+
+						 xml.getElementsByTagName("direction")[0].getAttributeNode("value").nodeValue+")");
+	$("#city_pressure").html(xml.getElementsByTagName("pressure")[0].getAttributeNode("value").nodeValue+" hpa");
+	$("#city_humidity").html(xml.getElementsByTagName("humidity")[0].getAttributeNode("value").nodeValue+" %");
+	$("#city_sunrise").html(new Date(xml.getElementsByTagName("sun")[0].getAttributeNode("rise").nodeValue).toLocaleString());
+	$("#city_sunset").html(new Date(xml.getElementsByTagName("sun")[0].getAttributeNode("set").nodeValue).toLocaleString());
+	$("#city_geocoords").html("["+xml.getElementsByTagName("coord")[0].getAttributeNode("lon").nodeValue+", "+
+							  xml.getElementsByTagName("coord")[0].getAttributeNode("lat").nodeValue+"]");
+	// $("#city_sunrise").html(get_sunrise_time.getHours().toLocaleString() + ":" + get_sunrise_time.getMinutes().toLocaleString());
+	// $("#city_sunset").html(get_sunrset_time.getHours().toLocaleString() + ":" + get_sunrset_time.getMinutes().toLocaleString());
 
-function xHR(url,method,format,callback) {
-	var httpXmlRequest = new XMLHttpRequest();
-	httpXmlRequest.open(method,url,true);
-	httpXmlRequest.send(null);
-		httpXmlRequest.onreadystatechange = function() {
-			if(httpXmlRequest.readyState == 4 && httpXmlRequest.status == 200){
-				if(format == "json"){
-					format_obj = JSON.parse(httpXmlRequest.responseText);
-				}else{
-					format_obj = httpXmlRequest.responseXML;
-				}
-				callback(format_obj);
-			}
-		}
 }
-
 
 // global
 var record_city;
-var DomId_nextday;
+
 function mainFunc(){
-	var url_7days = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Taipei&mode=json&units=metric&cnt= 7&appid=44db6a862fba0b067b1930da0d769e98";
-	var url_current_city = "http://api.openweathermap.org/data/2.5/weather?q=Taipei,tw&mode=xml&units=metric&appid=44db6a862fba0b067b1930da0d769e98";
+	var url_7days = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Taipei&mode=json&units=metric&cnt= 7&appid=5df396cf7b4d7b339bc250ebfd041f2e";
+	var url_current_city = "http://api.openweathermap.org/data/2.5/weather?q=Taipei,tw&mode=xml&units=metric&appid=5df396cf7b4d7b339bc250ebfd041f2e";
 	var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-	var DomId_nextday = document.getElementById("nextDay");
-	var city_id = 1668341;
+	// var DomId_nextday = document.getElementById("nextDay");
 
 	$("#container_currentCity").show();
 	$("#container_nextday").hide();
 
-	record_city = "taipei";
+	// record_city = "taipei";
 
-	$.getJSON(url_7days,function(result){
-		DomId_nextday.innerHTML = "<h3>Next days</h3>";
-		for (var j=0; j < 7; j++){
-			// 7 days
-			genNextDayHtml(result,month,j,DomId_nextday);
-		}
-		$.get(url_current_city,function(result){
-			genCurrentCityHtml(result,0,city_id);
-		});
-	 });
+	$.get(url_current_city,function(result){
+		genCurrentCityHtml(result);
+	});
+
+	// 這是取得Days API
+	// $.getJSON(url_7days,function(result){
+	// 	DomId_nextday.innerHTML = "<h3>Next days</h3>";
+	// 	for (var j=0; j < 7; j++){
+	// 		// 7 days
+	// 		genNextDayHtml(result,month,j,DomId_nextday);
+	// 	}
+
+	//  });
 }
