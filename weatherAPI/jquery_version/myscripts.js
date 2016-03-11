@@ -2,12 +2,13 @@ function onChangeForDays(days){
 	DomId_nextday = document.getElementById("nextDay");
 	month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 	url = "http://api.openweathermap.org/data/2.5/forecast/daily?q="+record_city+"&mode=json&units=metric&cnt="+days+"&appid=44db6a862fba0b067b1930da0d769e98";
-	xHR(url,"GET","json",function(json_obj){
+	$.getJSON(url,function(result){
 		DomId_nextday.innerHTML = "<h3>Next days</h3>";
 		for (var j=0; j < days; j++){
-			genNextDayHtml(json_obj,month,j,DomId_nextday);
+			// 7 days
+			genNextDayHtml(result,month,j,DomId_nextday);
 		}
-	});
+	 });
 }
 
 function onChangeForCity(city){
@@ -29,8 +30,8 @@ function onChangeForCity(city){
 			record_city = "london";
 			break;
 	}
-	xHR(url,"GET","xml",function(xml_obj){
-		genCurrentCityHtml(xml_obj,0,id);
+	$.get(url,function(result){
+		genCurrentCityHtml(result,0,id);
 	});
 }
 
@@ -132,8 +133,8 @@ function mainFunc(){
 			// 7 days
 			genNextDayHtml(result,month,j,DomId_nextday);
 		}
-		xHR(url_current_city,"GET","xml",function(xml_obj){
-			genCurrentCityHtml(xml_obj,0,city_id);
-		});	
+		$.get(url_current_city,function(result){
+			genCurrentCityHtml(result,0,city_id);
+		});
 	 });
 }
