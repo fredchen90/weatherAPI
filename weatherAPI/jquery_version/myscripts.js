@@ -1,59 +1,43 @@
 function onChangeForDays(days){
-	DomId_nextday = document.getElementById("nextDay");
-	month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-	url = "http://api.openweathermap.org/data/2.5/forecast/daily?q="+record_city+"&mode=json&units=metric&cnt="+days+"&appid=5df396cf7b4d7b339bc250ebfd041f2e";
+	var domId_nextday = document.getElementById("nextDay");
+	var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+	var url = "http://api.openweathermap.org/data/2.5/forecast/daily?q="+RECORD_CITY+"&mode=json&units=metric&cnt="+days+"&appid=5df396cf7b4d7b339bc250ebfd041f2e";
 	$.getJSON(url,function(result){
-		DomId_nextday.innerHTML = "<h3>Next days</h3>";
+		domId_nextday.innerHTML = "";
 		for (var j=0; j < days; j++){
-			// 7 days
-			genNextDayHtml(result,month,j,DomId_nextday);
+			genNextDayHtml(result,month,j,domId_nextday);
 		}
 	 });
 }
 
 function onChangeForCity(city){
-	switch (city){
-		case 'taipei':
-		default:
-			url = "http://api.openweathermap.org/data/2.5/weather?q=Taipei,tw&mode=xml&units=metric&appid=5df396cf7b4d7b339bc250ebfd041f2e";
-			id = 1668341;
-			record_city = city;
-			break;
-		case 'newyork':
-			url = "http://api.openweathermap.org/data/2.5/weather?q=Newyork,us&mode=xml&units=metric&appid=5df396cf7b4d7b339bc250ebfd041f2e";
-			id = 5128581;
-			record_city = city;
-			break;
-		case 'london':
-			url = "http://api.openweathermap.org/data/2.5/weather?q=london,uk&mode=xml&units=metric&appid=5df396cf7b4d7b339bc250ebfd041f2e";
-			id = 2643743;
-			record_city = city;
-			break;
+	var map = {
+		'taipei,tw' : 1668341,
+		'newyork,us' : 5128581,
+		'london,uk' : 2643743
 	}
+	var url = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&mode=xml&units=metric&appid=5df396cf7b4d7b339bc250ebfd041f2e"
+	RECORD_CITY = city;
 	$.get(url,function(result){
-		genCurrentCityHtml(result,0,id);
+		genCurrentCityHtml(result,0,map[city]);
 	});
 }
 
-function currentCity(){
-	var tab_currentCity = document.getElementById("tab_currentCity");
-	var tab_nextDay = document.getElementById("tab_nextDay");
-	tab_currentCity.className = "tab-focus";
-	tab_nextDay.className = "tab";
-	$("#container_currentCity").show();
-	$("#container_nextday").hide();
+function tabChange(focus,unfocus){
+	var tab_focus = document.getElementById(focus);
+	var tab = document.getElementById(unfocus);
+	tab_focus.className = "tab-focus";
+	tab.className = "tab";
+	if(focus === "tab_currentCity"){
+		$("#container_currentCity").show();
+		$("#container_nextday").hide();		
+	}else{
+		$("#container_nextday").show();
+		$("#container_currentCity").hide();		
+	}
 }
 
-function nextDay(){
-	var tab_nextDay = document.getElementById("tab_nextDay");
-	var tab_currentCity = document.getElementById("tab_currentCity");
-	tab_nextDay.className = "tab-focus";
-	tab_currentCity.className = "tab";
-	$("#container_nextday").show();
-	$("#container_currentCity").hide();
-}
-
-function genNextDayHtml(json,month,listIds,DomId_nextday){
+function genNextDayHtml(json,month,listIds,domId_nextday){
 	var json_obj = json;
 	var getDate_1 = new Date((json_obj.list[listIds].dt)*1000).getDate();
 	var getMonth_1 = new Date((json_obj.list[listIds].dt)*1000).getMonth();
@@ -67,7 +51,7 @@ function genNextDayHtml(json,month,listIds,DomId_nextday){
 				"<p><span style='display:block;'>" + json_obj.list[listIds].speed + "m/s" + "</span>" + 
 				"<span style='display:inline-block;'>" + "clouds: " + json_obj.list[listIds].clouds + "%, " +"</span>"+
 				"<span style='display:inline-block;'>" + json_obj.list[listIds].pressure + " hpa" + "</span></p></div>" + "</div>";
-	DomId_nextday.innerHTML += tempHtml;
+	domId_nextday.innerHTML += tempHtml;
 }
 
 function genCurrentCityHtml(xml){
@@ -94,30 +78,20 @@ function genCurrentCityHtml(xml){
 }
 
 // global
-var record_city;
+var RECORD_CITY;
 
 function mainFunc(){
 	var url_7days = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Taipei&mode=json&units=metric&cnt= 7&appid=5df396cf7b4d7b339bc250ebfd041f2e";
 	var url_current_city = "http://api.openweathermap.org/data/2.5/weather?q=Taipei,tw&mode=xml&units=metric&appid=5df396cf7b4d7b339bc250ebfd041f2e";
-	var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-	// var DomId_nextday = document.getElementById("nextDay");
 
 	$("#container_currentCity").show();
 	$("#container_nextday").hide();
 
-	// record_city = "taipei";
+	RECORD_CITY = "taipei";
 
 	$.get(url_current_city,function(result){
 		genCurrentCityHtml(result);
 	});
 
-	// 這是取得Days API
-	// $.getJSON(url_7days,function(result){
-	// 	DomId_nextday.innerHTML = "<h3>Next days</h3>";
-	// 	for (var j=0; j < 7; j++){
-	// 		// 7 days
-	// 		genNextDayHtml(result,month,j,DomId_nextday);
-	// 	}
-
-	//  });
+	onChangeForDays(5);
 }

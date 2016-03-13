@@ -11,8 +11,8 @@
 
 <div style="width:450px;height:50px;">
 	<ul style="width:80%;height:100%">
-		<li style="float:left;list-style:none"><a href="#CurrentCity" id="tab_currentCity" class="tab-focus" onclick="currentCity();">Current City</a></li>
-		<li style="float:left;list-style:none"><a href="#NextDay" id="tab_nextDay" style="text-decoration:none" onclick="nextDay();">Next Days</a></li>
+		<li style="float:left;list-style:none"><a href="#CurrentCity" id="tab_currentCity" class="tab-focus" onclick="tabChange('tab_currentCity','tab_nextDay');">Current City</a></li>
+		<li style="float:left;list-style:none"><a href="#NextDay" id="tab_nextDay" style="text-decoration:none" onclick="tabChange('tab_nextDay','tab_currentCity');">Next Days</a></li>
 	</ul>
 </div>
 
@@ -20,9 +20,9 @@
 	<div id="dropdown_city">
 		<select onChange="onChangeForCity(this.options[this.selectedIndex].value)">
 		<option value="#">請選擇</option>
-		<option value="taipei">Taipei<ption>
-		<option value="newyork">New York</option>
-		<option value="london">London</option>
+		<option value="taipei,tw">Taipei<ption>
+		<option value="newyork,us">New York</option>
+		<option value="london,uk">London</option>
 		</select>
 	</div>
 	<div style="width:450px;height:1100px;">
@@ -80,7 +80,10 @@
 		<option value="7">7 days</option>
 		</select>
 	</div>
-	<div id="nextDay" style="width:450px;height:1100px"></div>
+	<div style="width:450px;height:1100px">
+		<h3>Next days</h3>
+		<div id="nextDay"></div>
+	</div>
 </div>
 
 </body>
