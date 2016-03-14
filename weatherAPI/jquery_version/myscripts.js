@@ -1,6 +1,5 @@
 function onChangeForDays(days){
 	var domId_nextday = document.getElementById("nextDay");
-	var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 	var url = "http://api.openweathermap.org/data/2.5/forecast/daily?q="+RECORD_CITY+"&mode=json&units=metric&cnt="+days+"&appid=5df396cf7b4d7b339bc250ebfd041f2e";
 	$.getJSON(url,function(result){
 		domId_nextday.innerHTML = "";
@@ -11,15 +10,10 @@ function onChangeForDays(days){
 }
 
 function onChangeForCity(city){
-	var map = {
-		'taipei,tw' : 1668341,
-		'newyork,us' : 5128581,
-		'london,uk' : 2643743
-	}
 	var url = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&mode=xml&units=metric&appid=5df396cf7b4d7b339bc250ebfd041f2e"
 	RECORD_CITY = city;
 	$.get(url,function(result){
-		genCurrentCityHtml(result,0,map[city]);
+		genCurrentCityHtml(result);
 	});
 }
 
@@ -88,6 +82,7 @@ function genCurrentCityHtml(xml){
 
 // global
 var RECORD_CITY;
+var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 function mainFunc(){
 	var url_7days = "http://api.openweathermap.org/data/2.5/forecast/daily?q=Taipei&mode=json&units=metric&cnt= 7&appid=5df396cf7b4d7b339bc250ebfd041f2e";
@@ -98,9 +93,6 @@ function mainFunc(){
 
 	RECORD_CITY = "taipei";
 
-	$.get(url_current_city,function(result){
-		genCurrentCityHtml(result);
-	});
-
+	onChangeForCity(RECORD_CITY);
 	onChangeForDays(5);
 }
