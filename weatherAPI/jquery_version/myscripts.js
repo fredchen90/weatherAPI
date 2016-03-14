@@ -55,10 +55,15 @@ function genNextDayHtml(json,month,listIds,domId_nextday){
 }
 
 function genCurrentCityHtml(xml){
+	var img_class = "i"+xml.getElementsByTagName("weather")[0].getAttributeNode("icon").nodeValue;
+	// remove img class
+	$("#city_weather-img").removeClass();
+
+	// add value
 	$("#get_time").html(new Date(xml.getElementsByTagName("lastupdate")[0].getAttributeNode("value").nodeValue).toLocaleString());
 	$("#city_name").html(xml.getElementsByTagName("city")[0].getAttributeNode("name").nodeValue+", "+
 						 xml.getElementsByTagName("country")[0].childNodes[0].nodeValue);
-	$("#city_weather-img").addClass("i"+xml.getElementsByTagName("weather")[0].getAttributeNode("icon").nodeValue);
+	$("#city_weather-img").addClass(img_class+" city-icon");
 	$("#city_temp").html(xml.getElementsByTagName("temperature")[0].getAttributeNode("value").nodeValue);
 	$("#city_desciption").html(xml.getElementsByTagName("weather")[0].getAttributeNode("value").nodeValue);
 	$("#city_cloud").html(xml.getElementsByTagName("clouds")[0].getAttributeNode("name").nodeValue);
