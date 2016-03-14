@@ -24,11 +24,15 @@ function onChangeForCity(city){
 }
 
 function tabChange(focus,unfocus){
-	var tab_focus = document.getElementById(focus);
-	var tab = document.getElementById(unfocus);
+	var map = {
+		'city' : 'tab_currentCity',
+		'day' : 'tab_nextDay'
+	}
+	var tab_focus = document.getElementById(map[focus]);
+	var tab = document.getElementById(map[unfocus]);
 	tab_focus.className = "tab-focus";
 	tab.className = "tab";
-	if(focus === "tab_currentCity"){
+	if(map[focus] === "tab_currentCity"){
 		$("#container_currentCity").show();
 		$("#container_nextday").hide();		
 	}else{
