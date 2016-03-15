@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html ng-app="myapp">
+<head>
+	<title>Weather API</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script type="text/javascript" src="controller.js"></script>
+</head>
+<body>
+<div style="width:450px;height:50px;" ng-controller="tabController">
+	<ul style="width:80%;height:100%">
+		<li style="float:left;list-style:none"><a href="#CurrentCity" id="tab_currentCity" class="tab-focus" ng-click="switchTab('city')">Current City</a></li>
+		<li style="float:left;list-style:none"><a href="#NextDay" id="tab_nextDay" style="text-decoration:none" ng-click="switchTab('days')">Next Days</a></li>
+	</ul>
+</div>
+<div id="container_currentCity" ng-controller="selectController">
+	<div>
+		<select ng-model="myCity" ng-options="city.name for city in citys "></select>		
+	</div>
+	{{myCity.id}}
+</div>
+	<div style="width:450px;height:1100px;" ng-controller="selectController">
+		<h3 id="city_name">{{test}}</h3>
+		<div>
+			<h2>
+				<span id="city_weather-img" class="city-icon"></span>
+				<span id="city_temp" style="display:inline-block;margin-top:10px"></span>
+			</h2>
+			<span id="city_desciption" style="display:block;"></span>
+			<span id="get_time" style="display:block;"></span>
+			<table rules="all" cellpadding='5'>
+				<tbody>
+					<tr>
+						<td>Wind</td>
+						<td id="city_wind">{{city_wind}}</td>
+					</tr>
+					<tr>
+						<td>Cloudiness</td>
+						<td id="city_cloud">{{city_cloud}}</td>
+					</tr>
+					<tr>
+						<td>Pressure</td>
+						<td id="city_pressure">{{city_pressure}}</td>
+					</tr>
+					<tr>
+						<td>Humidity</td>
+						<td id="city_humidity">{{city_humidity}}</td>
+					</tr>
+					<tr>
+						<td>Sunrise</td>
+						<td id="city_sunrise">{{city_sunrise}}</td>
+					</tr>
+					<tr>
+						<td>Sunset</td>
+						<td id="city_sunset">{{city_sunset}}</td>
+					</tr>
+					<tr>
+						<td>Geo coords</td>
+						<td id="city_geocoords">{{city_geocoords}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+body {
+	color: #505050;
+}
+
+
+h3 {
+	font-size: 24px;
+	font-family: Oswald,sans-serif;
+}
+
+hr {
+	color: #DDDDDD;
+	border-style: solid;
+}
+
+img {
+	vertical-align: middle;
+}
+
+i {
+	display: inline-block;
+	padding: 5px;
+	margin: 2px;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+a {
+	color: #337ab7;
+	text-decoration: none;
+}
+
+table {
+	width:450px;
+	height:350px;
+	border:1px #ddd solid;
+	padding:5px;
+	margin-top:15px;
+}
+
+td:nth-child(odd) {
+	width:150px;
+}
+
+tr:nth-child(odd) td {
+	background-color: #f9f9f9;
+}
+
+/*div div{
+	padding: 5px;
+	line-height: 1.42857143;
+	display: inline-block;
+}*/
+
+.hide {
+	display:none;
+}
+
+.show {
+	display:block;
+}
+
+.tab-focus {
+	color: #555;
+ 	background-color: #fff;
+	border: 2px solid #ddd;
+	border-bottom-color: transparent;
+}
+
+.tab {
+	margin-right: 2px;
+	border: 2px solid transparent;
+	border-radius: 4px 4px 0 0;
+}
+
+.date-weather-block {
+	display: inline-block;
+	width: 120px;
+	height: 110px;
+	padding: 5px;
+	vertical-align: middle;
+}
+
+.date {
+	float:left;
+	padding:1px;
+	margin-top:33px
+}
+
+.icon {
+	float: left;
+	width: 50px;
+	height: 50px;
+	padding: 2px;
+	margin-top: 26px;
+}
+
+.city-icon {
+	float: left;
+	width: 50px;
+	height: 50px;
+	padding: 2px;
+/*	margin-top: 26px;*/
+}
+
+.desciption {
+	display: inline-block;
+	width: 300px;
+	height: 110px;
+	padding: 5px;
+	vertical-align: middle;
+	margin-top: -6px;
+}
+
+.icon-box {
+	padding: 3px;
+	margin: 1px;
+}
+
+.label {
+	color: #fff;
+}
+
+.label-warning {
+	background-color: #f0ad4e;
+}
+
+.label-default {
+	background-color: #999;
+}
+
+.background-img {
+	background-image: url(img/result.png);
+/*	background-position: 60px 0px;*/
+	background-repeat: no-repeat;
+}
+
+.i01d {
+	background-image: url(img/result.png);
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+
+.i01n {
+	background-image: url(img/result.png);
+	background-repeat: no-repeat;
+	background-position: 0px -60px;
+}
+
+.i02d {
+	background-image: url(img/result.png);
+	background-repeat: no-repeat;
+	background-position: 0px -120px;
+}
+
+.i04d {
+	background-image: url(img/result.png);
+	background-repeat: no-repeat;
+	background-position: 0px -180px;
+}
+
+.i10d {
+	background-image: url(img/result.png);
+	background-repeat: no-repeat;
+	background-position: 0px -240px;
+}
