@@ -5,6 +5,8 @@ app.controller('tabController',  ['$scope', function($scope) {
 	$scope.city_class = "tab-focus";
 	$scope.day_class = "tab";
 	$scope.record_name = "taipei";
+	$scope.content1_class = "show";
+	$scope.content2_class = "hide";	
 	
 	$scope.switchTab = function(tab) {
 		$scope.active_tab = tab;
